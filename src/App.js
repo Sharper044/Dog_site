@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+The base layout of the app, including the header and the router,
+all providers, as well as any global styles.
+*/
 
-function App() {
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core';
+import Header from './components/Header';
+import { BreedProvider } from './data/breeds';
+import { PicturesProvider } from './data/pictures';
+import Routes from './Routes';
+
+/* TODO:
+    9) Go over once for code cleanliness
+ */
+
+const useStyles = makeStyles(() => ({
+  app: {
+    textAlign: 'center',
+  },
+}));
+
+const App = () => {
+  const styles = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <BrowserRouter>
+        <BreedProvider>
+          <PicturesProvider>
+            <Header />
+            <Routes />
+          </PicturesProvider>
+        </BreedProvider>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
